@@ -4,9 +4,9 @@ public class Bus {
     private String maker,series;
     private int seatNumber;
 
-    Integer driverOne = null;
-    Integer driverTwo = null;
-    Integer idBus = null;
+    private Driver driverOne = null;
+    private Driver driverTwo = null;
+    Integer id = null;
 
     public Bus() {
     }
@@ -17,15 +17,15 @@ public class Bus {
         this.seatNumber = seatNumber;
     }
 
-    public Bus(Integer idBus,String maker, String series, int seatNumber) {
-        this.idBus = idBus;
+    public Bus(int id,String maker, String series, int seatNumber) {
+        this.id = id;
         this.maker = maker;
         this.series = series;
         this.seatNumber = seatNumber;
     }
 
-    public Bus(Integer idBus,String maker, String series, int seatNumber, Integer driverOne, Integer driverTwo) {
-        this.idBus = idBus;
+    public Bus(int id,String maker, String series, int seatNumber, Driver driverOne, Driver driverTwo) {
+        this.id = id;
         this.maker = maker;
         this.series = series;
         this.seatNumber = seatNumber;
@@ -57,7 +57,7 @@ public class Bus {
         this.seatNumber = seatNumber;
     }
 
-    public Integer getDriverOne() {
+    public Driver getDriverOne() {
         return driverOne;
     }
 
@@ -65,7 +65,7 @@ public class Bus {
         this.driverOne = driverOne;
     }
 
-    public Integer getDriverTwo() {
+    public Driver getDriverTwo() {
         return driverTwo;
     }
 
@@ -73,12 +73,12 @@ public class Bus {
         this.driverTwo = driverTwo;
     }
 
-    public Integer getIdBus() {
-        return idBus;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdBus(Integer idBus) {
-        this.idBus = idBus;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
@@ -95,9 +95,13 @@ public class Bus {
     }
 
     public boolean equals(Bus bus) {
-        if (idBus != null) {
-            return (bus.getIdBus().equals(this.getIdBus()));
+        if (id != null) {
+            return (bus.getId().equals(this.getId()));
         }
         return false;
+    }
+
+    public int setId() {
+        return 0;
     }
 }

@@ -12,7 +12,7 @@ public class TransportDAO {
     private static Connection connection;
 
     private static PreparedStatement addBus,addDriver,getBusses,getDrivers,deleteBus,deleteDriver,deleteFromBusses,deleteFromDrivers,
-    dodijeliVozacuAutobus1Statement,dodijeliVozacuAutobus2Statement,getDriverById,getDriverFromUpit;
+    dodijeliVozacuAutobus1,dodijeliVozacuAutobus2,getDriverById,getDriverFromUpit;
 
     private TransportDAO(){
         try {
@@ -24,16 +24,16 @@ public class TransportDAO {
         try {
             getBusses = connection.prepareStatement("Select * from busses;");
             getDriverFromUpit = connection.prepareStatement("Select * from drivers;");
-            addBus = connection.prepareStatement("insert into Busses values (null, ?, ?, ?, null, null)");
-            addDriver = connection.prepareStatement("insert into Drivers values (null, ?, ?, ?, ?, ?)"); //kad stavimo null za id, on se automatski incrementa i skontati koji mu je sljedeći id, da ne moramo mi misliti
             getDrivers = connection.prepareStatement("select * from Drivers");
+            addBus = connection.prepareStatement("insert into Busses values (null, ?, ?, ?, null, null)");
+            addDriver = connection.prepareStatement("insert into Drivers values (null, ?, ?, ?, ?, ?)");
             deleteBus = connection.prepareStatement("delete from Busses where id = ?");
             deleteDriver = connection.prepareStatement("delete from Drivers where id = ?");
             deleteFromBusses = connection.prepareStatement("delete from Busses");
             deleteFromDrivers = connection.prepareStatement("delete from Drivers");
             getDriverById = connection.prepareStatement("select * FROM Drivers WHERE id = ?");
-            dodijeliVozacuAutobus1Statement = connection.prepareStatement("UPDATE Busses SET driverOne = ? WHERE Busses.id = ?");
-            dodijeliVozacuAutobus2Statement = connection.prepareStatement("UPDATE Busses SET driverTwo = ? WHERE Busses.id = ?");
+            dodijeliVozacuAutobus1 = connection.prepareStatement("UPDATE Busses SET driverOne = ? WHERE Busses.id = ?");
+            dodijeliVozacuAutobus2 = connection.prepareStatement("UPDATE Busses SET driverTwo = ? WHERE Busses.id = ?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,7 +82,7 @@ public class TransportDAO {
                 String serija = resultSet.getString(3);
                 int brojSjedista = resultSet.getInt(4);
                 bus = new Bus(proizvodjac, serija, brojSjedista);
-                bus.setIdBus(id);
+                bus.setId(id);
 
                 int driverOneId = resultSet.getInt("driverOne");
                 int driverTwoId = resultSet.getInt("driverTwo");
@@ -146,11 +146,11 @@ public class TransportDAO {
                 LocalDate rodjendan = (resultSet.getDate("birthday")).toLocalDate();
                 LocalDate zaposlenje = (resultSet.getDate("hire_date")).toLocalDate();
                 driver = new Driver(name, surname, isbn,rodjendan,zaposlenje);
-                driver.getId(id);
+              driver.getId(id);
 
             }
         } catch (SQLException e) {
-            System.out.println("Nije kreiran bus!");
+            System.out.println("Nije kreiran driver!");
         }
 
         return driver;
@@ -189,7 +189,7 @@ public class TransportDAO {
 
     public void deleteBus(Bus bus) {
         try {
-            deleteBus.setInt(1, bus.setIdBus());
+            deleteBus.setInt(1, bus.setId());
             deleteBus.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -200,18 +200,20 @@ public class TransportDAO {
 
         if (which == 1) {
             try {
-                dodijeliVozacuAutobus1Statement.setInt(1, driver.getId());
-                dodijeliVozacuAutobus1Statement.setInt(2, bus.getIdBus());
-                dodijeliVozacuAutobus1Statement.executeUpdate();
+                dodijeliVozacuAutobus1.setInt(1, driver.getId());
+                dodijeliVozacuAutobus1.setInt(2, bus.getId());
+                dodijeliVozacuAutobus1.executeUpdate();
                 bus.setDriverOne(driver);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else {
+        }
+
+        if(which == 2) {
             try {
-                dodijeliVozacuAutobus2Statement.setInt(1, driver.getId());
-                dodijeliVozacuAutobus2Statement.setInt(2, bus.getIdBus());
-                dodijeliVozacuAutobus2Statement.executeUpdate();
+                dodijeliVozacuAutobus2.setInt(1, driver.getId());
+                dodijeliVozacuAutobus2.setInt(2, bus.getId());
+                dodijeliVozacuAutobus2.executeUpdate();
                 bus.setDriverTwo(driver);
             } catch (SQLException e) {
                 e.printStackTrace();
