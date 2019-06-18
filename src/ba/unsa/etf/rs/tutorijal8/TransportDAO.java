@@ -12,7 +12,7 @@ public class TransportDAO {
     private static Connection connection;
 
     private static PreparedStatement addBus,addDriver,getBusses,getDrivers,deleteBus,deleteDriver,deleteFromBusses,deleteFromDrivers,
-    dodijeliVozacuAutobus1,dodijeliVozacuAutobus2,getDriverById,getDriverFromUpit;
+            dodijeliVozacuAutobus1,dodijeliVozacuAutobus2,getDriverById,getDriverFromUpit;
 
     private TransportDAO(){
         try {
@@ -22,18 +22,18 @@ public class TransportDAO {
             e.printStackTrace();
         }
         try {
-            getBusses = connection.prepareStatement("Select * from busses;");
-            getDriverFromUpit = connection.prepareStatement("Select * from drivers;");
-            getDrivers = connection.prepareStatement("select * from Drivers");
-            addBus = connection.prepareStatement("insert into Busses values (null, ?, ?, ?, null, null)");
-            addDriver = connection.prepareStatement("insert into Drivers values (null, ?, ?, ?, ?, ?)");
-            deleteBus = connection.prepareStatement("delete from Busses where id = ?");
-            deleteDriver = connection.prepareStatement("delete from Drivers where id = ?");
-            deleteFromBusses = connection.prepareStatement("delete from Busses");
-            deleteFromDrivers = connection.prepareStatement("delete from Drivers");
-            getDriverById = connection.prepareStatement("select * FROM Drivers WHERE id = ?");
-            dodijeliVozacuAutobus1 = connection.prepareStatement("UPDATE Busses SET driverOne = ? WHERE Busses.id = ?");
-            dodijeliVozacuAutobus2 = connection.prepareStatement("UPDATE Busses SET driverTwo = ? WHERE Busses.id = ?");
+            getBusses = connection.prepareStatement("Select * from bus;");
+            getDriverFromUpit = connection.prepareStatement("Select * from vozac;");
+            getDrivers = connection.prepareStatement("select * from vozac");
+            addBus = connection.prepareStatement("insert into bus values (null, ?, ?, ?, null, null)");
+            addDriver = connection.prepareStatement("insert into vozac values (null, ?, ?, ?, ?, ?)");
+            deleteBus = connection.prepareStatement("delete from bus where id = ?");
+            deleteDriver = connection.prepareStatement("delete from vozac where id = ?");
+            deleteFromBusses = connection.prepareStatement("delete from bus");
+            deleteFromDrivers = connection.prepareStatement("delete from vozac");
+            getDriverById = connection.prepareStatement("select * FROM bus WHERE id = ?");
+            dodijeliVozacuAutobus1 = connection.prepareStatement("UPDATE bus SET driverOne = ? WHERE Busses.id = ?");
+            dodijeliVozacuAutobus2 = connection.prepareStatement("UPDATE bus SET driverTwo = ? WHERE Busses.id = ?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -146,7 +146,7 @@ public class TransportDAO {
                 LocalDate rodjendan = (resultSet.getDate("birthday")).toLocalDate();
                 LocalDate zaposlenje = (resultSet.getDate("hire_date")).toLocalDate();
                 driver = new Driver(name, surname, isbn,rodjendan,zaposlenje);
-              driver.getId(id);
+                driver.getId(id);
 
             }
         } catch (SQLException e) {

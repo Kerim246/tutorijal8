@@ -1,13 +1,18 @@
 package ba.unsa.etf.rs.tutorijal8;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Driver {
-    private Integer id = null;
+    private Integer id;
     private String name,surname,jmb;
     private LocalDate birthday,hire_date;
 
-    public Driver(String name, String surname, String jmb, LocalDate datum_rodjenja, LocalDate datum_zaposlenja) {
+    public Driver() {
+    }
+
+    public Driver(String name, String surname, String jmb, LocalDate birthday, LocalDate hire_date) {
         this.name = name;
         this.surname = surname;
         this.jmb = jmb;
@@ -15,7 +20,7 @@ public class Driver {
         this.hire_date = hire_date;
     }
 
-    public Driver(Integer id, String name, String surname, String jmb, LocalDate datum_rodjenja, LocalDate datum_zaposlenja) {
+    public Driver(Integer id, String name, String surname, String jmb, LocalDate birthday, LocalDate hire_date) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -24,16 +29,19 @@ public class Driver {
         this.hire_date = hire_date;
     }
 
-    public Driver() {
+    public void getId(int id) {
+
     }
 
     public Integer getId() {
         return id;
     }
 
+
     public void setId(Integer id) {
         this.id = id;
     }
+
 
 
     public String getName() {
@@ -84,8 +92,4 @@ public class Driver {
     public boolean equals(Driver d){ return (d.getJmb().equals(this.getJmb()));
     }
 
-
-    public void getId(int id) {
-
-    }
 }
