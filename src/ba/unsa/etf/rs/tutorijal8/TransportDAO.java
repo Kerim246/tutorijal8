@@ -22,18 +22,18 @@ public class TransportDAO {
             e.printStackTrace();
         }
         try {
-            getBusses = connection.prepareStatement("Select * from bus;");
-            getDriverFromUpit = connection.prepareStatement("Select * from vozac;");
-            getDrivers = connection.prepareStatement("select * from vozac");
-            addBus = connection.prepareStatement("insert into bus values (null, ?, ?, ?, null, null)");
-            addDriver = connection.prepareStatement("insert into vozac values (null, ?, ?, ?, ?, ?)");
-            deleteBus = connection.prepareStatement("delete from bus where id = ?");
-            deleteDriver = connection.prepareStatement("delete from vozac where id = ?");
-            deleteFromBusses = connection.prepareStatement("delete from bus");
-            deleteFromDrivers = connection.prepareStatement("delete from vozac");
-            getDriverById = connection.prepareStatement("select * FROM bus WHERE id = ?");
-            dodijeliVozacuAutobus1 = connection.prepareStatement("UPDATE bus SET driverOne = ? WHERE Busses.id = ?");
-            dodijeliVozacuAutobus2 = connection.prepareStatement("UPDATE bus SET driverTwo = ? WHERE Busses.id = ?");
+            getBusses = connection.prepareStatement("Select * from Busevi;");
+            getDriverFromUpit = connection.prepareStatement("Select * from Drivers;");
+            getDrivers = connection.prepareStatement("select * from Drivers");
+            addBus = connection.prepareStatement("insert into Busevi values (null, ?, ?, ?, null, null)");
+            addDriver = connection.prepareStatement("insert into Drivers values (null, ?, ?, ?, ?, ?)");
+            deleteBus = connection.prepareStatement("delete from busevi where id = ?");
+            deleteDriver = connection.prepareStatement("delete from Drivers where id = ?");
+            deleteFromBusses = connection.prepareStatement("delete from Busevi");
+            deleteFromDrivers = connection.prepareStatement("delete from Drivers");
+            getDriverById = connection.prepareStatement("select * FROM Busevi WHERE id = ?");
+            dodijeliVozacuAutobus1 = connection.prepareStatement("UPDATE Busevi SET driverOne = ? WHERE Busses.id = ?");
+            dodijeliVozacuAutobus2 = connection.prepareStatement("UPDATE Busevi SET driverTwo = ? WHERE Busses.id = ?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -230,8 +230,5 @@ public class TransportDAO {
             e.printStackTrace();
         }
     }
-
-
-
 
 }
