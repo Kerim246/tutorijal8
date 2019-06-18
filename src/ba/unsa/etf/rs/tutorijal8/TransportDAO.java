@@ -189,7 +189,7 @@ public class TransportDAO {
 
     public void deleteBus(Bus bus) {
         try {
-            deleteBus.setInt(1, bus.setId());
+            deleteBus.setInt(1, bus.getId());
             deleteBus.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -209,7 +209,7 @@ public class TransportDAO {
             }
         }
 
-        if(which == 2) {
+            if(which == 2) {
             try {
                 dodijeliVozacuAutobus2.setInt(1, driver.getId());
                 dodijeliVozacuAutobus2.setInt(2, bus.getId());
